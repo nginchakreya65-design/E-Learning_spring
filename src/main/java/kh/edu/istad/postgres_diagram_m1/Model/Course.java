@@ -4,56 +4,52 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Audited;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @Entity
-@Table (name="courses")
-
+@Table(name="courses")
 public class Course {
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, length = 4)
-    private long id;
-    private Integer count_rating;
-    @Column(nullable = false,unique = true, length = 6)
-    private LocalDateTime craete_at;
-    @Column(nullable = false,length = 255)
-    private String description;
-    @Column(nullable = false,columnDefinition = "FLOAT(4)")
-    private Float discount_percent;
-    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 1")
-    private boolean active = true;
-    private Boolean is_public;
-    @Column(nullable = false,length = 255)
-    private String keyword;
-    @Column(nullable = false,length = 255)
-    private Integer level;
-    @Column( precision = 38, scale = 2, nullable = false)
+    private Integer id;
+    @Column(unique = true , nullable = false)
+    private  Integer count_rating;
+    @Column(unique = true , nullable = false)
+    private LocalDateTime created_at;
+    @Column(unique = true , nullable = false)
+    private  String description;
+    @Column(unique = true , nullable = false)
+    private  Float discount_percent;
+    @Column(unique = true , nullable = false)
+    private  Boolean is_deleted;
+    @Column(unique = true , nullable = false)
+    private  Boolean is_published;
+    @Column(unique = true , nullable = false)
+    private  String keywords;
+    @Column(unique = true , nullable = false)
+    private  String level;
+    @Column(unique = true , nullable = false,length = 38)
     private BigDecimal price;
-    @Column(nullable = false,length = 255)
-    private String slug;
-    @Column(nullable = false,unique = true, length = 6)
-    private Float star_rating;
-    @Column(nullable = false, length = 500)
-    private String thumbnailUrl;
-    @Column(nullable = false,length = 255)
-    private String title;
-    @Column( precision = 10, scale = 2)
-    private BigDecimal totalHours;
-    @Column(nullable = false,updatable = false)
-    private LocalDateTime update_at;
-    @Column(nullable = false,unique = true,length = 4)
-    private Integer category_id;
-    @Column(nullable = false,unique = true,length = 255)
-    private String instructor_id;
-
-
-
+    @Column(unique = true , nullable = false)
+    private  String slug;
+    @Column(unique = true , nullable = false)
+    private Float star_rating ;
+    @Column(unique = true , nullable = false)
+    private  String thumbnail;
+    @Column(unique = true , nullable = false)
+    private  String title;
+    @Column(unique = true , nullable = false)
+    private  Float total_hours;
+    @Column(unique = true , nullable = false)
+    private  LocalDateTime updated_at;
+    @Column(unique = true , nullable = false)
+    private  Integer category_id;
+    @Column(unique = true , nullable = false)
+    private  String instructor_id;
+    @ManyToOne
+    private  Enrollment enrollment;
 }
